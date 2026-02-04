@@ -140,6 +140,12 @@
       background: #fff3f6;
     }
 
+    .meme-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     .meme-caption {
       margin: 10px 0 18px;
       font-family: "Inter", "Helvetica Neue", sans-serif;
@@ -162,7 +168,7 @@
 </head>
 <body>
   <div class="card">
-    <h1>Will you be my Valentine?</h1>
+    <h1>Will you be my Valentine, Kriti?</h1>
     <div class="button-area" id="arena">
       <button class="btn" id="no">No</button>
       <button class="btn" id="yes">Yes</button>
@@ -174,16 +180,7 @@
     <div class="meme-card" role="dialog" aria-modal="true" aria-labelledby="memeTitle">
       <h2 id="memeTitle">Bold move.</h2>
       <div class="meme-box">
-        <svg viewBox="0 0 320 200" width="100%" height="100%" aria-hidden="true">
-          <rect width="320" height="200" fill="#fff3f6"/>
-          <circle cx="90" cy="90" r="35" fill="#1f1f1f"/>
-          <rect x="70" y="125" width="40" height="55" fill="#1f1f1f"/>
-          <rect x="110" y="130" width="120" height="12" fill="#1f1f1f"/>
-          <rect x="210" y="120" width="12" height="60" fill="#1f1f1f"/>
-          <rect x="50" y="140" width="20" height="12" fill="#1f1f1f"/>
-          <text x="160" y="40" text-anchor="middle" font-size="20" font-family="Georgia" fill="#3a1a2a">When you tap “No”</text>
-          <text x="160" y="65" text-anchor="middle" font-size="16" font-family="Georgia" fill="#3a1a2a">and still get a meme</text>
-        </svg>
+        <img src="images.jpeg" alt="Failed... again meme" />
       </div>
       <p class="meme-caption">This was never a real option.</p>
       <button class="btn small" id="closeMeme">Ok, ok</button>

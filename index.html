@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine?</title>
+  <style>
+    :root {
+      --bg1: #ff7aa2;
+      --bg2: #ffd1dc;
+      --ink: #3a1a2a;
+      --yes: #ff4d6d;
+      --no: #2d2d2d;
+      --card: #fff8fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Playfair Display", "Georgia", serif;
+      background: radial-gradient(circle at 20% 20%, #fff 0%, var(--bg2) 35%, var(--bg1) 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .card {
+      width: min(92vw, 720px);
+      background: var(--card);
+      border-radius: 28px;
+      padding: 48px 32px 64px;
+      box-shadow: 0 22px 80px rgba(58, 26, 42, 0.25);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before,
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 122, 162, 0.25);
+      filter: blur(4px);
+      z-index: 0;
+    }
+
+    .card::before { top: -80px; left: -60px; }
+    .card::after { bottom: -90px; right: -70px; }
+
+    h1 {
+      margin: 0 0 28px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .button-area {
+      position: relative;
+      height: 200px;
+      margin-top: 20px;
+      z-index: 1;
+      touch-action: none;
+    }
+
+    .btn {
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      position: absolute;
+    }
+
+    .btn:active { transform: translateY(2px) scale(0.98); }
+
+    #yes {
+      background: var(--yes);
+      color: #fff;
+      left: 55%;
+      top: 80px;
+      transform: translateX(-50%);
+    }
+
+    #no {
+      background: var(--no);
+      color: #fff;
+      left: 25%;
+      top: 80px;
+    }
+
+    .hint {
+      font-family: "Inter", "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      opacity: 0.7;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meme-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 999;
+    }
+
+    .meme-overlay.show { display: flex; }
+
+    .meme-card {
+      width: min(92vw, 440px);
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      font-family: "Playfair Display", "Georgia", serif;
+      color: var(--ink);
+    }
+
+    .meme-card h2 { margin: 0 0 12px; font-size: 26px; }
+
+    .meme-box {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #ffb3c6;
+      margin: 12px 0;
+      background: #fff3f6;
+    }
+
+    .meme-caption {
+      margin: 10px 0 18px;
+      font-family: "Inter", "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      opacity: 0.75;
+    }
+
+    .btn.small {
+      position: static;
+      padding: 10px 22px;
+      font-size: 16px;
+    }
+
+    @media (max-width: 520px) {
+      .button-area { height: 240px; }
+      #no { left: 20%; }
+      #yes { left: 65%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Will you be my Valentine?</h1>
+    <div class="button-area" id="arena">
+      <button class="btn" id="no">No</button>
+      <button class="btn" id="yes">Yes</button>
+    </div>
+    <div class="hint">Try to click “Yes”</div>
+  </div>
+
+  <div class="meme-overlay" id="memeOverlay" aria-hidden="true">
+    <div class="meme-card" role="dialog" aria-modal="true" aria-labelledby="memeTitle">
+      <h2 id="memeTitle">Bold move.</h2>
+      <div class="meme-box">
+        <svg viewBox="0 0 320 200" width="100%" height="100%" aria-hidden="true">
+          <rect width="320" height="200" fill="#fff3f6"/>
+          <circle cx="90" cy="90" r="35" fill="#1f1f1f"/>
+          <rect x="70" y="125" width="40" height="55" fill="#1f1f1f"/>
+          <rect x="110" y="130" width="120" height="12" fill="#1f1f1f"/>
+          <rect x="210" y="120" width="12" height="60" fill="#1f1f1f"/>
+          <rect x="50" y="140" width="20" height="12" fill="#1f1f1f"/>
+          <text x="160" y="40" text-anchor="middle" font-size="20" font-family="Georgia" fill="#3a1a2a">When you tap “No”</text>
+          <text x="160" y="65" text-anchor="middle" font-size="16" font-family="Georgia" fill="#3a1a2a">and still get a meme</text>
+        </svg>
+      </div>
+      <p class="meme-caption">This was never a real option.</p>
+      <button class="btn small" id="closeMeme">Ok, ok</button>
+    </div>
+  </div>
+
+  <script>
+    const arena = document.getElementById("arena");
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const memeOverlay = document.getElementById("memeOverlay");
+    const closeMeme = document.getElementById("closeMeme");
+
+    function moveYesAway(cursorX, cursorY) {
+      const arenaRect = arena.getBoundingClientRect();
+      const btnRect = yesBtn.getBoundingClientRect();
+
+      const btnCenterX = btnRect.left + btnRect.width / 2;
+      const btnCenterY = btnRect.top + btnRect.height / 2;
+
+      const dx = btnCenterX - cursorX;
+      const dy = btnCenterY - cursorY;
+      const distance = Math.hypot(dx, dy);
+
+      if (distance > 120) return; // only move when the cursor gets close
+
+      const angle = Math.atan2(dy, dx);
+      const moveDistance = 120 + Math.random() * 60;
+
+      let newX = (btnRect.left - arenaRect.left) + Math.cos(angle) * moveDistance;
+      let newY = (btnRect.top - arenaRect.top) + Math.sin(angle) * moveDistance;
+
+      const maxX = arenaRect.width - btnRect.width;
+      const maxY = arenaRect.height - btnRect.height;
+
+      newX = Math.max(0, Math.min(maxX, newX));
+      newY = Math.max(0, Math.min(maxY, newY));
+
+      yesBtn.style.left = `${newX}px`;
+      yesBtn.style.top = `${newY}px`;
+      yesBtn.style.transform = "translateX(0)";
+    }
+
+    arena.addEventListener("mousemove", (e) => {
+      moveYesAway(e.clientX, e.clientY);
+    });
+
+    arena.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      if (touch) moveYesAway(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    arena.addEventListener("touchmove", (e) => {
+      const touch = e.touches[0];
+      if (touch) moveYesAway(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    yesBtn.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      if (touch) {
+        e.preventDefault();
+        moveYesAway(touch.clientX, touch.clientY);
+      }
+    }, { passive: false });
+
+    noBtn.addEventListener("click", () => {
+      memeOverlay.classList.add("show");
+      memeOverlay.setAttribute("aria-hidden", "false");
+    });
+
+    closeMeme.addEventListener("click", () => {
+      memeOverlay.classList.remove("show");
+      memeOverlay.setAttribute("aria-hidden", "true");
+    });
+
+    memeOverlay.addEventListener("click", (e) => {
+      if (e.target === memeOverlay) {
+        memeOverlay.classList.remove("show");
+        memeOverlay.setAttribute("aria-hidden", "true");
+      }
+    });
+  </script>
+</body>
+</html>
